@@ -1,0 +1,6 @@
+name: 'Webform Privacy Statement'
+type: module
+description: 'Provides a reusable Privacy Statement webform element with centralized content management.'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - webform:webform

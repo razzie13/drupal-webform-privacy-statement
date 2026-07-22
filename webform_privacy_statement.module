@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Webform Privacy Statement module.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter() for webform_admin_config_forms_form.
+ */
+function webform_privacy_statement_form_webform_admin_config_forms_form_alter(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $config = \Drupal::config('webform_privacy_statement.settings');
+  $content = $config->get('content');
+
+  $form['privacy_statement_settings'] = [
+    '#type' => 'details',
+    '#title' => t('Privacy statement settings'),
+    '#open' => TRUE,
+    '#tree' => TRUE,
+  ];
+
+  $form['privacy_statement_settings']['content'] = [
+    '#type' => 'text_format',
+    '#title' => t('Privacy Statement'),
+    '#description' => t('Enter the privacy statement content. This will be displayed on all webforms that use the Privacy Statement element.'),
+    '#default_value' => $content['value'] ?? '',
+    '#format' => $content['format'] ?? 'basic_html',
+  ];
+
+  $form['#submit'][] = 'webform_privacy_statement_config_form_submit';
+}
+
+/**
+ * Custom submit handler for saving the privacy statement content.
+ */
+function webform_privacy_statement_config_form_submit(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $values = $form_state->getValue('privacy_statement_settings');
+  $content = $values['content'];
+
+  \Drupal::configFactory()->getEditable('webform_privacy_statement.settings')
+    ->set('content', [
+      'value' => $content['value'],
+      'format' => $content['format'],
+    ])
+    ->save();
+}

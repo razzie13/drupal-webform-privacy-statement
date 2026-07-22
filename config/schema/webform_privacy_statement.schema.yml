@@ -1,0 +1,14 @@
+webform_privacy_statement.settings:
+  type: config_object
+  label: 'Webform Privacy Statement settings'
+  mapping:
+    content:
+      type: mapping
+      label: 'Content'
+      mapping:
+        value:
+          type: string
+          label: 'Privacy statement text'
+        format:
+          type: string
+          label: 'Text format'
