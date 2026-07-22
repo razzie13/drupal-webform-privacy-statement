@@ -2,14 +2,14 @@
 
 namespace Drupal\webform_privacy_statement\Element;
 
-use Drupal\Core\Render\Element\RenderElement;
+use Drupal\Core\Render\Element\RenderElementBase;
 
 /**
- * Provides a render element for the privacy statement.
+ * Provides a form element for the privacy statement.
  *
- * @RenderElement("privacy_statement")
+ * @FormElement("privacy_statement")
  */
-class PrivacyStatement extends RenderElement {
+class PrivacyStatement extends RenderElementBase {
 
   /**
    * {@inheritdoc}
@@ -35,6 +35,11 @@ class PrivacyStatement extends RenderElement {
         '#text' => $content['value'],
         '#format' => $content['format'] ?? 'basic_html',
       ];
+    }
+
+    // Set #name for form-item wrapper classes.
+    if (!isset($element['#name']) && isset($element['#webform_key'])) {
+      $element['#name'] = $element['#webform_key'];
     }
 
     return $element;
