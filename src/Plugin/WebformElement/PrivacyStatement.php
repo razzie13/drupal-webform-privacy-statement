@@ -12,7 +12,7 @@ use Drupal\webform\WebformSubmissionInterface;
  * @WebformElement(
  *   id = "privacy_statement",
  *   label = @Translation("Privacy statement"),
- *   description = @Translation("Displays the centrally managed privacy statement."),
+ *   description = @Translation("Displays the centrally managed privacy statement. Content can be edited at /admin/structure/webform/config under Privacy statement settings."),
  *   category = @Translation("Reusable content"),
  * )
  */
